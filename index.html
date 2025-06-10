@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="医師・医療従事者のための英語医療面接学習サイト。挨拶から症状別の問診、診断説明まで、実践的な英会話をステップバイステップで学べます。">
+    <meta name="keywords" content="英語医療面接, 医療英語, 医師, 看護師, 医療従事者, 英会話, 問診, HPI, 病歴聴取">
+    <title>Clinic Conversation Lab - 英語医療面接</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .section-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+        }
+    </style>
+</head>
+<body class="text-slate-700">
+
+    <div id="app" class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="index.html" class="flex items-center gap-3 text-2xl font-bold text-teal-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+                    <span>Clinic Conversation Lab</span>
+                </a>
+                <div class="text-sm text-slate-500 hidden md:block">
+                    英語医療面接のための実践英会話
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto px-4 sm:px-6 py-8">
+            <div id="page-content">
+                <div class="text-center mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">英語医療面接を、自信の持てるスキルに。</h1>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                        このサイトは、日本の医師・医療従事者の皆様が、英語での医療面接を体系的に学べるように設計されています。
+                        基礎から学ぶ「学習ステップ」と、特定の症状に対応する「症状別問診」の2つのコースからお選びいただけます。
+                    </p>
+                </div>
+                <div class="mb-16">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-teal-400 pb-2">学習ステップ</h2>
+                    <div id="steps-container" class="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+                        <!-- 学習ステップのカードがここに挿入されます -->
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6 border-b-2 border-teal-400 pb-2">症状別の現病歴（HPI）問診</h2>
+                    <div id="hpi-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- HPIのカードがここに挿入されます -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-800 text-slate-300 mt-auto">
+            <div class="container mx-auto px-6 py-4 text-center text-sm">
+                &copy; 2024 Clinic Conversation Lab. All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // データを定義
+        const medicalStepsContent = {
+            step1: { title: "Step 1: 基本的な挨拶と主訴の確認", subtitle: "患者との信頼関係を築く最初のステップ", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>` },
+            step2: { title: "Step 2: 現病歴の深掘り (HPI)", subtitle: "咳の症状を例に、詳しく情報を聞き出す", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a6.003 6.003 0 0 0-4.243 10.243l-1.07 1.07a1 1 0 0 0 1.414 1.414l1.07-1.07A6.003 6.003 0 0 0 12 12Z"/><path d="M15.727 6.273a6.003 6.003 0 0 0-10.243-4.243l-1.07-1.07a1 1 0 0 0-1.414 1.414l1.07 1.07A6.003 6.003 0 0 0 15.727 6.273Z"/><path d="m2 22 5.5-5.5"/><path d="m16.5 16.5 5.5 5.5"/><path d="m2 2 5.5 5.5"/><path d="m16.5 7.5 5.5-5.5"/></svg>` },
+            step3: { title: "Step 3: 痛みの評価 (OPQRST)", subtitle: "痛みを伴う症状の評価方法をマスターする", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>` },
+            step4: { title: "Step 4: 共感と話を促す表現", subtitle: "患者との信頼関係を深めるコミュニケーション", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>` },
+            step5: { title: "Step 5: 既往歴と手術歴", subtitle: "過去の病歴や手術について確認する", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>` },
+            step6: { title: "Step 6: 服薬歴とアレルギー歴", subtitle: "現在使用中の薬とアレルギーについて聞く", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>` },
+            step7: { title: "Step 7: 家族歴 (Family History)", subtitle: "遺伝的リスクや家族の健康状態を尋ねる", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>` },
+            step8: { title: "Step 8: 社会歴と生活習慣", subtitle: "喫煙、飲酒、職業などを確認する", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a2 2 0 0 0 2-2V7l-3-3-3 3v13a2 2 0 0 0 2 2Z"/><path d="M19 10a2 2 0 0 0-2-2h-1v-1a2 2 0 0 0-2-2h-2"/><path d="M5 10a2 2 0 0 1 2-2h1v-1a2 2 0 0 1 2-2h2"/></svg>` },
+            step9: { title: "Step 9: 全身症状の確認 (ROS)", subtitle: "主訴以外の全身の症状を見渡す", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10c0-2.22-1.21-4.16-3-5.19"/><circle cx="12" cy="10" r="3"/><path d="M12 10v12"/></svg>` },
+            step10: { title: "Step 10: 身体診察の声かけ", subtitle: "診察中の指示や声かけの仕方を学ぶ", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18v-4.5a4.5 4.5 0 1 1 9 0V18"/><path d="M11 3a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M15 3a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M4 18h16"/><circle cx="12" cy="20" r="2"/></svg>` },
+            step11: { title: "Step 11: 検査の説明と同意", subtitle: "必要な検査について説明し、同意を得る", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 14-2 2 2 2"/><path d="m14 18 2-2-2-2"/></svg>` },
+            step12: { title: "Step 12: 診断・治療とクロージング", subtitle: "診断を伝え、今後の計画を共有し診察を終える", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>` }
+        };
+
+        const hpiContent = {
+            chest_pain: { title: "HPI: Chest Pain - 胸痛の問診", subtitle: "鑑別診断を念頭においた、胸痛患者への詳細な問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>` },
+            headache: { title: "HPI: Headache - 頭痛の問診", subtitle: "危険な頭痛の兆候（Red Flags）を見逃さないための問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10.5c.39-.48.96-.83 1.5-1.5.34-.41.68-.85.99-1.32.61-.95 1-2.11 1-3.18A5.5 5.5 0 0 0 12.5 0h-1A5.5 5.5 0 0 0 6 5.5c0 1.07.39 2.23 1 3.18.31.47.65.91.99 1.32.54.67 1.11 1.02 1.5 1.5"/><path d="M2.5 10.5c-1-.2-2.31.2-2.5 1.5-.15.96.64 1.94 1.5 2.5 1.13.73 2.5.83 3.5 1 .84.14 1.63.41 2.37.8.44.23.86.51 1.26.83.91.73 1.73 1.63 2.37 2.87.21.4.4.82.58 1.26.29.71.53 1.52.53 2.24v.2c0 1.1-.9 2-2 2h-1.5c-1.1 0-2-.9-2-2v-.5a3.52 3.52 0 0 1 1.5-2.5c.34-.28.72-.53 1.12-.75.83-.45 1.58-1.05 2.13-1.88.21-.31.39-.64.55-.98.22-.48.38-1 .38-1.52v-.2c0-.52-.16-1.04-.38-1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2v.2c0 .52-.16 1.04-.38 1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2Z"/></svg>` },
+            abdominal_pain: { title: "HPI: Abdominal Pain - 腹痛の問診", subtitle: "痛みの部位から原因を絞り込むための詳細な問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>` },
+            cough: { title: "HPI: Cough - 咳嗽の問診", subtitle: "急性・慢性の咳の原因を鑑別するための問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a6.003 6.003 0 0 0-4.243 10.243l-1.07 1.07a1 1 0 0 0 1.414 1.414l1.07-1.07A6.003 6.003 0 0 0 12 12Z"/><path d="M15.727 6.273a6.003 6.003 0 0 0-10.243-4.243l-1.07-1.07a1 1 0 0 0-1.414 1.414l1.07 1.07A6.003 6.003 0 0 0 15.727 6.273Z"/><path d="m2 22 5.5-5.5"/><path d="m16.5 16.5 5.5 5.5"/><path d="m2 2 5.5 5.5"/><path d="m16.5 7.5 5.5-5.5"/></svg>` },
+            fever: { title: "HPI: Fever - 発熱の問診", subtitle: "感染症や非感染性の原因を探るための問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>` },
+            rash: { title: "HPI: Rash - 発疹の問診", subtitle: "発疹の性状や分布から原因を特定する問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>` },
+            dizziness: { title: "HPI: Dizziness - めまいの問診", subtitle: "めまいの種類を区別し、原因を探るための問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.6C5.5 18 6 15 8 13s3-2 5-2c2.8 0 4.5 1.5 5 3c.5 1.5 1 4.5 1 6.5"/><path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12"/><path d="M19 4.4C18.5 6 18 9 16 11s-3 2-5 2c-2.8 0-4.5-1.5-5-3c-.5-1.5-1-4.5-1-6.5"/></svg>` },
+            nausea_vomiting: { title: "HPI: Nausea & Vomiting - 嘔吐の問診", subtitle: "嘔吐の原因や脱水症状の有無を確認する問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 10.5c-1-.2-2.31.2-2.5 1.5-.15.96.64 1.94 1.5 2.5 1.13.73 2.5.83 3.5 1 .84.14 1.63.41 2.37.8.44.23.86.51 1.26.83.91.73 1.73 1.63 2.37 2.87.21.4.4.82.58 1.26.29.71.53 1.52.53 2.24v.2c0 1.1-.9 2-2 2h-1.5c-1.1 0-2-.9-2-2v-.5a3.52 3.52 0 0 1 1.5-2.5c.34-.28.72-.53 1.12-.75.83-.45 1.58-1.05 2.13-1.88.21-.31.39-.64.55-.98.22-.48.38-1 .38-1.52v-.2c0-.52-.16-1.04-.38-1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2v.2c0 .52-.16 1.04-.38 1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2Z"/></svg>` }
+        };
+
+        // カードを生成してコンテナに挿入する関数
+        const createCard = (key, item, type, path) => `
+            <a href="./${path}/${key}.html" class="section-card block bg-white p-6 rounded-xl shadow-md border border-slate-200">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-teal-100 text-teal-600 p-3 rounded-full">
+                        ${item.icon}
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-800">${item.title}</h3>
+                        <p class="text-slate-500">${item.subtitle}</p>
+                    </div>
+                </div>
+            </a>
+        `;
+
+        const stepsContainer = document.getElementById('steps-container');
+        const hpiContainer = document.getElementById('hpi-container');
+
+        // 学習ステップのカードを生成
+        for (const key in medicalStepsContent) {
+            stepsContainer.innerHTML += createCard(key, medicalStepsContent[key], 'step', 'steps');
+        }
+
+        // HPIのカードを生成
+        for (const key in hpiContent) {
+            hpiContainer.innerHTML += createCard(key, hpiContent[key], 'hpi', 'hpi');
+        }
+    </script>
+</body>
+</html>
