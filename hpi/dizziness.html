@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="めまいの種類（回転性、前失神、平衡障害）を区別し、BPPVなどの原因を鑑別するための英語医療面接を学びます。">
+    <title>HPI: Dizziness - めまいの問診 - Clinic Conversation Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #f8fafc; }
+        .chat-bubble { max-width: 75%; animation: fadeIn 0.5s ease-in-out; }
+        .sidebar-link.active { background-color: #14b8a6; color: white; font-weight: 600; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-slate-700">
+    <div id="app" class="flex flex-col min-h-screen">
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../index.html" class="flex items-center gap-3 text-2xl font-bold text-teal-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+                    <span>Clinic Conversation Lab</span>
+                </a>
+                <div class="text-sm text-slate-500 hidden md:block">英語医療面接のための実践英会話</div>
+            </nav>
+        </header>
+        <main class="flex-grow container mx-auto px-4 sm:px-6 py-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <aside class="lg:w-1/3 xl:w-1/4">
+                    <div class="p-4 bg-white rounded-xl shadow-md border border-slate-200 sticky top-24">
+                        <h3 class="text-lg font-bold mb-4 text-slate-900">症状別問診</h3>
+                        <nav id="sidebar-nav" class="space-y-2"></nav>
+                    </div>
+                </aside>
+                <div class="lg:w-2/3 xl:w-3/4">
+                    <div id="page-content"></div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-slate-800 text-slate-300 mt-auto">
+            <div class="container mx-auto px-6 py-4 text-center text-sm">&copy; 2024 Clinic Conversation Lab. All Rights Reserved.</div>
+        </footer>
+    </div>
+    <script>
+    // --- データセクション ---
+    const hpiContent = {
+        chest_pain: { title: "HPI: Chest Pain - 胸痛の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>` },
+        headache: { title: "HPI: Headache - 頭痛の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10.5c.39-.48.96-.83 1.5-1.5.34-.41.68-.85.99-1.32.61-.95 1-2.11 1-3.18A5.5 5.5 0 0 0 12.5 0h-1A5.5 5.5 0 0 0 6 5.5c0 1.07.39 2.23 1 3.18.31.47.65.91.99 1.32.54.67 1.11 1.02 1.5 1.5"/><path d="M2.5 10.5c-1-.2-2.31.2-2.5 1.5-.15.96.64 1.94 1.5 2.5 1.13.73 2.5.83 3.5 1 .84.14 1.63.41 2.37.8.44.23.86.51 1.26.83.91.73 1.73 1.63 2.37 2.87.21.4.4.82.58 1.26.29.71.53 1.52.53 2.24v.2c0 1.1-.9 2-2 2h-1.5c-1.1 0-2-.9-2-2v-.5a3.52 3.52 0 0 1 1.5-2.5c.34-.28.72-.53 1.12-.75.83-.45 1.58-1.05 2.13-1.88.21-.31.39-.64.55-.98.22-.48.38-1 .38-1.52v-.2c0-.52-.16-1.04-.38-1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2v.2c0 .52-.16 1.04-.38 1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2Z"/></svg>` },
+        abdominal_pain: { title: "HPI: Abdominal Pain - 腹痛の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>` },
+        cough: { title: "HPI: Cough - 咳嗽の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a6.003 6.003 0 0 0-4.243 10.243l-1.07 1.07a1 1 0 0 0 1.414 1.414l1.07-1.07A6.003 6.003 0 0 0 12 12Z"/><path d="M15.727 6.273a6.003 6.003 0 0 0-10.243-4.243l-1.07-1.07a1 1 0 0 0-1.414 1.414l1.07 1.07A6.003 6.003 0 0 0 15.727 6.273Z"/><path d="m2 22 5.5-5.5"/><path d="m16.5 16.5 5.5 5.5"/><path d="m2 2 5.5 5.5"/><path d="m16.5 7.5 5.5-5.5"/></svg>` },
+        fever: { title: "HPI: Fever - 発熱の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>` },
+        rash: { title: "HPI: Rash - 発疹の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>` },
+        dizziness: {
+            title: "HPI: Dizziness - めまいの問診",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12C2 6.5 6.5 2 12 2a10 10 0 0 1 8 4"/><path d="M5 19.6C5.5 18 6 15 8 13s3-2 5-2c2.8 0 4.5 1.5 5 3c.5 1.5 1 4.5 1 6.5"/><path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12"/><path d="M19 4.4C18.5 6 18 9 16 11s-3 2-5 2c-2.8 0-4.5-1.5-5-3c-.5-1.5-1-4.5-1-6.5"/></svg>`,
+            subtitle: "めまいの種類を区別し、原因を探るための問診",
+            conversation: [ { speaker: 'doctor', text: "You mentioned you're feeling dizzy. Can you describe the feeling for me? Does it feel like the room is spinning, or more like you're about to faint?", translation: "めまいがするとのことですが、どのような感じか教えていただけますか？部屋がグルグル回る感じですか、それとも気が遠くなるような感じですか？" }, { speaker: 'patient', text: "The room is spinning around me. It's really bad.", translation: "部屋が自分の周りをグルグル回っています。本当にひどいです。" }, { speaker: 'doctor', text: "Does anything trigger it, like changing your head position?", translation: "頭の位置を変えるなど、何か特定の動きで誘発されますか？" }, { speaker: 'patient', text: "Yes, it's worst when I roll over in bed or look up.", translation: "はい、ベッドで寝返りをうったり、上を向いたりすると一番ひどいです。" }, { speaker: 'doctor', text: "How long do the spinning episodes last?", translation: "その回転性のめまいは、一回あたりどのくらい続きますか？" }, { speaker: 'patient', text: "Less than a minute, but it's very intense.", translation: "1分もないですが、とても強烈です。" }, { speaker: 'doctor', text: "Are you experiencing any hearing loss or ringing in your ears?", translation: "難聴や耳鳴りはありますか？" }, { speaker: 'patient', text: "No, nothing like that.", translation: "いえ、そういったことはありません。" }, ],
+            explanation: { points: [ { title: "めまいの種類の特定", content: "めまいの問診では、`Vertigo`(回転性めまい)、`Presyncope`(前失神、気が遠くなる感じ)、`Disequilibrium`(平衡障害、ふらつき)のどれかを区別することが最も重要です。この患者さんの「部屋が回る」という表現は`Vertigo`を示唆します。" }, { title: "誘因と持続時間", content: "頭位変換で誘発され、持続時間が短い(秒〜分単位)回転性めまいは、良性発作性頭位めまい症(BPPV)の典型的な症状です。" }, { title: "随伴する聴覚症状", content: "難聴(hearing loss)や耳鳴り(tinnitus)を伴う場合は、メニエール病など他の内耳疾患を考える必要があります。" }, ], phrases: [ { original: "the room is spinning", alternative: "`I feel like I'm on a merry-go-round.`" }, { original: "about to faint", alternative: "`I feel lightheaded.` / `I feel like I'm going to pass out.`" }, ], vocabulary: [ { term: "Vertigo", definition: "回転性めまい" }, { term: "Lightheadedness / Presyncope", definition: "前失神、立ちくらみ" }, { term: "Disequilibrium", definition: "平衡障害、ふらつき" }, { term: "Benign Paroxysmal Positional Vertigo (BPPV)", definition: "良性発作性頭位めまい症" }, { term: "Tinnitus", definition: "耳鳴り" }, { term: "Episode", definition: "（症状の）発作、一回" }, ] }
+        },
+        nausea_vomiting: { title: "HPI: Nausea & Vomiting - 嘔吐の問診", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 10.5c-1-.2-2.31.2-2.5 1.5-.15.96.64 1.94 1.5 2.5 1.13.73 2.5.83 3.5 1 .84.14 1.63.41 2.37.8.44.23.86.51 1.26.83.91.73 1.73 1.63 2.37 2.87.21.4.4.82.58 1.26.29.71.53 1.52.53 2.24v.2c0 1.1-.9 2-2 2h-1.5c-1.1 0-2-.9-2-2v-.5a3.52 3.52 0 0 1 1.5-2.5c.34-.28.72-.53 1.12-.75.83-.45 1.58-1.05 2.13-1.88.21-.31.39-.64.55-.98.22-.48.38-1 .38-1.52v-.2c0-.52-.16-1.04-.38-1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2v.2c0 .52-.16 1.04-.38 1.52-.16-.34-.34-.67-.55-.98-.55-.83-1.3-1.43-2.13-1.88a4.99 4.99 0 0 0-1.12-.75A3.52 3.52 0 0 1 9.5 13v-.5c0-1.1.9-2 2-2h1.5c1.1 0 2 .9 2 2Z"/></svg>` }
+    };
+    const currentPageKey = 'dizziness';
+    const pageData = hpiContent[currentPageKey];
+
+    // --- 音声合成機能 ---
+    let voices = [];
+    let isSpeakingQueue = false;
+    function loadVoices() { voices = window.speechSynthesis.getVoices(); }
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    function speakAll(texts, btn) { /* ... (音声再生機能のコードは変更なし) ... */ }
+
+    // --- レンダリング ---
+    function render() {
+        const pageContentContainer = document.getElementById('page-content');
+        const playAllButton = `<div class="flex justify-end mb-4"><button id="play-all-btn" class="bg-teal-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-teal-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>会話を再生</span></button></div>`;
+        const conversationHtml = pageData.conversation.map(chat => `<div class="flex my-4 ${chat.speaker === 'doctor' ? 'justify-start' : 'justify-end'}"><div class="flex items-start gap-3 max-w-[85%] sm:max-w-[75%]">${chat.speaker === 'doctor' ? `<div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold flex-shrink-0">Dr</div>` : ''}<div class="chat-bubble rounded-xl p-4 ${chat.speaker === 'doctor' ? 'bg-teal-100 text-teal-900 rounded-tl-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tr-none'}"><p class="text-sm md:text-base">${chat.text}</p><p class="text-xs md:text-sm text-slate-500 mt-2 pt-2 border-t border-slate-200/80">${chat.translation}</p></div>${chat.speaker === 'patient' ? `<div class="w-10 h-10 rounded-full bg-slate-300 flex items-center justify-center text-slate-600 font-bold flex-shrink-0">Pt</div>` : ''}</div></div>`).join('');
+        const explanationHtml = (title, items, renderFn) => { if (!items || items.length === 0) return ''; return `<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 mb-6"><h4 class="text-xl font-semibold mb-4 text-slate-800">${title}</h4><div class="space-y-4">${items.map(renderFn).join('')}</div></div>`; };
+        
+        pageContentContainer.innerHTML = `<div class="mb-8"><h2 class="text-3xl font-bold text-slate-900">${pageData.title}</h2><p class="text-slate-500 mt-1">${pageData.subtitle}</p></div>${playAllButton}<div class="bg-white p-4 sm:p-6 rounded-xl shadow-inner border border-slate-200 mb-8">${conversationHtml}</div><div id="explanation-section">${explanationHtml('ポイント解説', pageData.explanation.points, item => `<div><h5 class="font-semibold text-teal-700">${item.title}</h5><p class="text-slate-600">${item.content}</p></div>`)}${explanationHtml('他の言い方', pageData.explanation.phrases, item => `<div class="border-l-4 border-teal-400 pl-4"><p class="text-slate-500">「${item.original}」の代わりに、こうも言えます：</p><p class="font-semibold text-teal-600">"${item.alternative}"</p></div>`)}${explanationHtml('関連ボキャブラリー', pageData.explanation.vocabulary, item => `<div class="flex justify-between items-center border-b border-slate-200 py-2 last:border-none"><p class="font-semibold text-slate-800">${item.term}</p><p class="text-slate-600">${item.definition}</p></div>`)}</div>`;
+        
+        // Sidebar
+        const sidebarNav = document.getElementById('sidebar-nav');
+        sidebarNav.innerHTML = Object.keys(hpiContent).map(key => `<a href="./${key.replace(/_/g, '-')}.html" class="sidebar-link flex items-center p-3 rounded-lg hover:bg-teal-100 hover:text-teal-700 transition-colors ${key === currentPageKey ? 'active' : 'text-slate-600'}">${hpiContent[key].icon}<span class="ml-3">${hpiContent[key].title}</span></a>`).join('');
+
+        // Event Listeners
+        const playAllBtn = document.getElementById('play-all-btn');
+        if(playAllBtn){
+            playAllBtn.addEventListener('click', () => {
+                const texts = pageData.conversation.map(chat => chat.text);
+                speakAll(texts, playAllBtn);
+            });
+        }
+    }
+
+    // --- 初期化 ---
+    loadVoices();
+    render();
+    </script>
+</body>
+</html>
