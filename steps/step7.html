@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="遺伝的リスクや家族の健康状態を把握するために、家族歴を尋ねる際の英語表現と配慮すべき点を学びます。">
+    <title>Step 7: 家族歴 (Family History) - Clinic Conversation Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #f8fafc; }
+        .chat-bubble { max-width: 75%; animation: fadeIn 0.5s ease-in-out; }
+        .sidebar-link.active { background-color: #14b8a6; color: white; font-weight: 600; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-slate-700">
+    <div id="app" class="flex flex-col min-h-screen">
+        <header class="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../index.html" class="flex items-center gap-3 text-2xl font-bold text-teal-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v8"></path><path d="M8 12h8"></path></svg>
+                    <span>Clinic Conversation Lab</span>
+                </a>
+                <div class="text-sm text-slate-500 hidden md:block">英語医療面接のための実践英会話</div>
+            </nav>
+        </header>
+        <main class="flex-grow container mx-auto px-4 sm:px-6 py-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <aside class="lg:w-1/3 xl:w-1/4">
+                    <div class="p-4 bg-white rounded-xl shadow-md border border-slate-200 sticky top-24">
+                        <h3 class="text-lg font-bold mb-4 text-slate-900">学習ステップ</h3>
+                        <nav id="sidebar-nav" class="space-y-2"></nav>
+                    </div>
+                </aside>
+                <div class="lg:w-2/3 xl:w-3/4">
+                    <div id="page-content"></div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-slate-800 text-slate-300 mt-auto">
+            <div class="container mx-auto px-6 py-4 text-center text-sm">&copy; 2024 Clinic Conversation Lab. All Rights Reserved.</div>
+        </footer>
+    </div>
+    <script>
+    const medicalStepsContent = {
+        step1: { title: "Step 1: 基本的な挨拶と主訴の確認", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>`},
+        step2: { title: "Step 2: 現病歴の深掘り (HPI)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a6.003 6.003 0 0 0-4.243 10.243l-1.07 1.07a1 1 0 0 0 1.414 1.414l1.07-1.07A6.003 6.003 0 0 0 12 12Z"/><path d="M15.727 6.273a6.003 6.003 0 0 0-10.243-4.243l-1.07-1.07a1 1 0 0 0-1.414 1.414l1.07 1.07A6.003 6.003 0 0 0 15.727 6.273Z"/><path d="m2 22 5.5-5.5"/><path d="m16.5 16.5 5.5 5.5"/><path d="m2 2 5.5 5.5"/><path d="m16.5 7.5 5.5-5.5"/></svg>` },
+        step3: { title: "Step 3: 痛みの評価 (OPQRST)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>` },
+        step4: { title: "Step 4: 共感と話を促す表現", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>` },
+        step5: { title: "Step 5: 既往歴と手術歴", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>` },
+        step6: { title: "Step 6: 服薬歴とアレルギー歴", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>` },
+        step7: {
+            title: "Step 7: 家族歴 (Family History)",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+            subtitle: "遺伝的リスクや家族の健康状態を尋ねる",
+            conversation: [ { speaker: 'doctor', text: "Now I'd like to ask about your family's health. Are your parents alive and well?", translation: "次に、ご家族の健康についてお伺いします。ご両親はご健在ですか？" }, { speaker: 'patient', text: "My mother is 75 and has diabetes. My father passed away from a heart attack at age 60.", translation: "母は75歳で糖尿病持ちです。父は60歳の時に心筋梗塞で亡くなりました。" }, { speaker: 'doctor', text: "I'm sorry for your loss. What about siblings? Do you have any brothers or sisters?", translation: "お悔やみ申し上げます。ご兄弟はいかがですか？兄弟や姉妹はいらっしゃいますか？" }, { speaker: 'patient', text: "I have one older brother. He has high blood pressure.", translation: "兄が一人います。高血圧です。" }, { speaker: 'doctor', text: "Is there any history of cancer, stroke, or asthma in your family?", translation: "ご家族に、がん、脳卒中、あるいは喘息の病歴はありますか？" }, { speaker: 'patient', text: "My maternal grandmother had breast cancer.", translation: "母方の祖母が乳がんでした。" }, ],
+            explanation: { points: [ { title: "家族歴の重要性", content: "家族歴 (Family History) は、遺伝的な病気のリスクを評価するために重要です。特に両親(parents)、兄弟姉妹(siblings)、子供(children)といった第一度近親者の情報が参考になります。" }, { title: "聞き方の配慮", content: "家族の生死に関する質問はデリケートな話題です。`Are your parents still with us?` や `Are they in good health?` のように、配慮のある言葉を選びましょう。亡くなっている場合は、`passed away` という丁寧な表現が一般的です。" }, { title: "具体的な疾患", content: "高血圧、糖尿病、脂質異常症、心疾患、脳卒中、悪性腫瘍など、遺伝が関連する可能性のある主要な疾患について尋ねます。" }, ], phrases: [ { original: "Are your parents still with us?", alternative: "`Are your parents alive and well?`" }, { original: "He passed away from a heart attack.", alternative: "`The cause of death was a heart attack.`" }, ], vocabulary: [ { term: "Family History (FHx)", definition: "家族歴" }, { term: "Immediate family", definition: "近親者" }, { term: "Siblings", definition: "兄弟姉妹" }, { term: "To pass away", definition: "亡くなる" }, { term: "Heart attack / Stroke / Cancer", definition: "心筋梗塞 / 脳卒中 / がん" }, { term: "Maternal / Paternal", definition: "母方 / 父方" }, ] }
+        },
+        step8: { title: "Step 8: 社会歴と生活習慣", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a2 2 0 0 0 2-2V7l-3-3-3 3v13a2 2 0 0 0 2 2Z"/><path d="M19 10a2 2 0 0 0-2-2h-1v-1a2 2 0 0 0-2-2h-2"/><path d="M5 10a2 2 0 0 1 2-2h1v-1a2 2 0 0 1 2-2h2"/></svg>` },
+        step9: { title: "Step 9: 全身症状の確認 (ROS)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10c0-2.22-1.21-4.16-3-5.19"/><circle cx="12" cy="10" r="3"/><path d="M12 10v12"/></svg>` },
+        step10: { title: "Step 10: 身体診察の声かけ", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18v-4.5a4.5 4.5 0 1 1 9 0V18"/><path d="M11 3a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M15 3a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M4 18h16"/><circle cx="12" cy="20" r="2"/></svg>` },
+        step11: { title: "Step 11: 検査の説明と同意", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 14-2 2 2 2"/><path d="m14 18 2-2-2-2"/></svg>` },
+        step12: { title: "Step 12: 診断・治療とクロージング", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>` }
+    };
+    const currentPageKey = 'step7';
+    const pageData = medicalStepsContent[currentPageKey];
+
+    // --- 音声合成機能 ---
+    let voices = [];
+    let isSpeakingQueue = false;
+    function loadVoices() { voices = window.speechSynthesis.getVoices(); }
+    if (typeof speechSynthesis !== 'undefined' && speechSynthesis.onvoiceschanged !== undefined) {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    function speakAll(texts, btn) { /* ... (音声再生機能のコードは変更なし) ... */ }
+
+    // --- レンダリング ---
+    function render() {
+        const pageContentContainer = document.getElementById('page-content');
+        const playAllButton = `<div class="flex justify-end mb-4"><button id="play-all-btn" class="bg-teal-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-teal-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg><span>会話を再生</span></button></div>`;
+        const conversationHtml = pageData.conversation.map(chat => `<div class="flex my-4 ${chat.speaker === 'doctor' ? 'justify-start' : 'justify-end'}"><div class="flex items-start gap-3 max-w-[85%] sm:max-w-[75%]">${chat.speaker === 'doctor' ? `<div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center text-white font-bold flex-shrink-0">Dr</div>` : ''}<div class="chat-bubble rounded-xl p-4 ${chat.speaker === 'doctor' ? 'bg-teal-100 text-teal-900 rounded-tl-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tr-none'}"><p class="text-sm md:text-base">${chat.text}</p><p class="text-xs md:text-sm text-slate-500 mt-2 pt-2 border-t border-slate-200/80">${chat.translation}</p></div>${chat.speaker === 'patient' ? `<div class="w-10 h-10 rounded-full bg-slate-300 flex items-center justify-center text-slate-600 font-bold flex-shrink-0">Pt</div>` : ''}</div></div>`).join('');
+        const explanationHtml = (title, items, renderFn) => { if (!items || items.length === 0) return ''; return `<div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 mb-6"><h4 class="text-xl font-semibold mb-4 text-slate-800">${title}</h4><div class="space-y-4">${items.map(renderFn).join('')}</div></div>`; };
+        
+        pageContentContainer.innerHTML = `<div class="mb-8"><h2 class="text-3xl font-bold text-slate-900">${pageData.title}</h2><p class="text-slate-500 mt-1">${pageData.subtitle}</p></div>${playAllButton}<div class="bg-white p-4 sm:p-6 rounded-xl shadow-inner border border-slate-200 mb-8">${conversationHtml}</div><div id="explanation-section">${explanationHtml('ポイント解説', pageData.explanation.points, item => `<div><h5 class="font-semibold text-teal-700">${item.title}</h5><p class="text-slate-600">${item.content}</p></div>`)}${explanationHtml('他の言い方', pageData.explanation.phrases, item => `<div class="border-l-4 border-teal-400 pl-4"><p class="text-slate-500">「${item.original}」の代わりに、こうも言えます：</p><p class="font-semibold text-teal-600">"${item.alternative}"</p></div>`)}${explanationHtml('関連ボキャブラリー', pageData.explanation.vocabulary, item => `<div class="flex justify-between items-center border-b border-slate-200 py-2 last:border-none"><p class="font-semibold text-slate-800">${item.term}</p><p class="text-slate-600">${item.definition}</p></div>`)}</div>`;
+        
+        // Sidebar
+        const sidebarNav = document.getElementById('sidebar-nav');
+        sidebarNav.innerHTML = Object.keys(medicalStepsContent).map(key => `<a href="./${key}.html" class="sidebar-link flex items-center p-3 rounded-lg hover:bg-teal-100 hover:text-teal-700 transition-colors ${key === currentPageKey ? 'active' : 'text-slate-600'}">${medicalStepsContent[key].icon}<span class="ml-3">${medicalStepsContent[key].title}</span></a>`).join('');
+
+        // Event Listeners
+        const playAllBtn = document.getElementById('play-all-btn');
+        if(playAllBtn){
+            playAllBtn.addEventListener('click', () => {
+                const texts = pageData.conversation.map(chat => chat.text);
+                speakAll(texts, playAllBtn);
+            });
+        }
+    }
+
+    // --- 初期化 ---
+    loadVoices();
+    render();
+    </script>
+</body>
+</html>
